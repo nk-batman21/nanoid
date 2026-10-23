@@ -309,6 +309,11 @@ for (let type of ['node', 'browser']) {
         equal(nanoid0(8), 'bbbbbbbb')
       })
 
+      test(`does not hang on size below 1`, { timeout: 2000 }, () => {
+        let nanoid4 = customRandom('abcd', 4, size => new Uint8Array(size))
+        equal(nanoid4(0.5), '')
+      })
+
       test(`supports power-of-two alphabets`, () => {
         let sequence = [2, 255, 3, 7]
         function fakeRandom(size) {
